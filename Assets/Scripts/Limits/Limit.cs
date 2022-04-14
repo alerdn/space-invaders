@@ -6,11 +6,12 @@ public class Limit : MonoBehaviour
 {
     private void OnCollisionEnter(Collision collision)
     {
-        Debug.Log("colidiu");
         if (collision.transform.tag == "Enemy")
         {
             var enemy = collision.gameObject.GetComponent<Enemy>();
             enemy.moveDirection *= -1;
+
+            enemy.StepForward();
         }
     }
 }
