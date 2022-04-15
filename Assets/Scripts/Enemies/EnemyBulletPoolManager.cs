@@ -18,7 +18,7 @@ public class EnemyBulletPoolManager : MonoBehaviour
         bulletPool = new List<GameObject>();
         for (int i = 0; i < amount; i++)
         {
-            var obj = Instantiate(bulletPrefab);
+            var obj = Instantiate(bulletPrefab, transform);
             obj.SetActive(false);
 
             bulletPool.Add(obj);

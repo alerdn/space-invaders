@@ -8,10 +8,8 @@ public class Limit : MonoBehaviour
     {
         if (collision.transform.tag == "Enemy")
         {
-            var enemy = collision.gameObject.GetComponent<Enemy>();
-            enemy.moveDirection *= -1;
-
-            enemy.StepForward();
+            var enemyLine = collision.gameObject.GetComponent<EnemyLine>();
+            enemyLine.moveDirection *= -1;
         }
     }
 }
