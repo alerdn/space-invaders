@@ -10,9 +10,22 @@ public class EnemyPoolManager : MonoBehaviour
 
     [Header("Spawn")]
     public List<Transform> spawnPoints;
-    public EnemyBulletPoolManager bulletPoolManager;
+    public BulletPoolManager bulletPoolManager;
 
     private void Awake()
+    {
+        StartPool();
+    }
+
+    private void Update()
+    {
+        foreach (var spawn in spawnPoints)
+        {
+            GetShootingEnemy(spawn)?.GetComponent<Enemy>().CanShoot(true);
+        }
+    }
+
+    private void StartPool()
     {
         enemyPool = new List<GameObject>();
         foreach (var spawn in spawnPoints)
@@ -30,17 +43,17 @@ public class EnemyPoolManager : MonoBehaviour
         }
     }
 
-    private void Update()
+    public void RestartPool()
     {
-        foreach (var spawn in spawnPoints)
+        foreach (var enemy in enemyPool)
         {
-           GetShootingEnemy(spawn)?.GetComponent<Enemy>().CanShoot(true);
+            enemy.SetActive(true);
         }
     }
 
     private GameObject GetShootingEnemy(Transform spawn)
     {
-        
+
         for (int i = 0; i < spawn.childCount; i++)
         {
             var enemy = spawn.GetChild(i);

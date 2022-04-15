@@ -4,14 +4,8 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-
-    public float speed = 5;
-    public float timeToReset = 10;
-
-    void Update()
-    {
-        transform.Translate(Vector3.back * speed * Time.deltaTime);
-    }
+    public float speed = 15;
+    public float timeToReset = 4;
 
     public void StartBullet()
     {

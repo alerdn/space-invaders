@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyBulletPoolManager : MonoBehaviour
+public class BulletPoolManager : MonoBehaviour
 {
     public GameObject bulletPrefab;
     public List<GameObject> bulletPool;

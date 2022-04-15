@@ -5,10 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour, IKillable
 {
     [Header("Bullet Pool")]
-    public EnemyBulletPoolManager poolManager;
+    public BulletPoolManager poolManager;
     public Transform shootPoint;
-    public float intervalToShoot = 5f;
+    [Header("Range interval to shoot")]
+    public float minInterval = 1f;
+    public float maxInterval = 5f;
 
+    private float _intervalToShoot = 5f;
     private Coroutine _shooting = null;
     private bool canShoot = false;
 
@@ -16,14 +19,14 @@ public class Enemy : MonoBehaviour, IKillable
     {
         if (_shooting == null && canShoot)
         {
-            intervalToShoot = Random.Range(0.5f, 2);
+            _intervalToShoot = Random.Range(minInterval, maxInterval);
             _shooting = StartCoroutine(Shoot());
         }
     }
 
     private IEnumerator Shoot()
     {
-        yield return new WaitForSeconds(intervalToShoot);
+        yield return new WaitForSeconds(_intervalToShoot);
 
         var bullet = poolManager.GetPooledBullet();
         if (bullet)
@@ -43,6 +46,6 @@ public class Enemy : MonoBehaviour, IKillable
 
     public void Kill()
     {
-        Destroy(gameObject);
+        gameObject.SetActive(false);
     }
 }
