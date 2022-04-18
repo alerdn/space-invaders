@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SpaceInvaders.Enemies;
-
 public class EnemyLine : MonoBehaviour
 {
     public int speedX = 2;

@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SpaceInvaders.Enemies;
-
 public class EnemyPoolManager : MonoBehaviour
 {
     public GameObject enemyPrefab;

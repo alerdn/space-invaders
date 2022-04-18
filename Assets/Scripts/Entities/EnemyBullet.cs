@@ -2,8 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace SpaceInvaders.Entities;
-
 public class EnemyBullet : Bullet
 {
     void Update()

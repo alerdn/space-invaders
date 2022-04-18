@@ -3,14 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
-namespace SpaceInvaders.Player;
-
 public class Player : MonoBehaviour, IKillable
 {
     public float speed = 16;
 
     [Header("Player Model")]
-    public PlayerModel model;
+    public Transform model;
     public float secondsToRotate = 0.5f;
 
     [Header("Bullet Pool")]
