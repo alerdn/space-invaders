@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 
+namespace SpaceInvaders.Player;
+
 public class Player : MonoBehaviour, IKillable
 {
     public float speed = 16;
@@ -41,7 +43,8 @@ public class Player : MonoBehaviour, IKillable
         }
 
         // Key Up
-        if(Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow)) {
+        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        {
             RotateShip(Vector3.zero);
         }
     }

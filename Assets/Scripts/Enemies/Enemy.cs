@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+namespace SpaceInvaders.Enemies;
+
 public class Enemy : MonoBehaviour, IKillable
 {
     [Header("Bullet Pool")]
