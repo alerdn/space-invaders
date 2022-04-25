@@ -61,7 +61,7 @@ public class Player : MonoBehaviour, IKillable
 
     private bool ShootControl()
     {
-        return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0);
+        return Input.GetKeyDown(KeyCode.Space);
     }
 
     private void RotateShip(Vector3 angle)
