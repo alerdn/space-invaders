@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class EnemyLine : MonoBehaviour
 {
-    public int speedX = 2;
+    public float speedX = 8.5f;
     public Vector3 moveDirection = Vector3.right;
 
     private void Update()

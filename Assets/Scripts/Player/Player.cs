@@ -15,21 +15,23 @@ public class Player : MonoBehaviour, IKillable
     public BulletPoolManager poolManager;
     public Transform shootPoint;
 
+    private Tween _shipRotating;
+
     private void Update()
     {
         // Key Down
-        if (Input.GetKey(KeyCode.RightArrow))
+        if (RightControl())
         {
             transform.Translate(Vector3.right * speed * Time.deltaTime);
             RotateShip(new Vector3(0, 0, -45));
         }
-        else if (Input.GetKey(KeyCode.LeftArrow))
+        else if (LeftControl())
         {
             transform.Translate(Vector3.left * speed * Time.deltaTime);
             RotateShip(new Vector3(0, 0, 45));
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (ShootControl())
         {
             var bullet = poolManager.GetPooledBullet();
             if (bullet)
@@ -41,15 +43,30 @@ public class Player : MonoBehaviour, IKillable
         }
 
         // Key Up
-        if (Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.LeftArrow))
+        if (RightControl() || LeftControl())
         {
             RotateShip(Vector3.zero);
         }
     }
 
+    private bool RightControl()
+    {
+        return Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
+    }
+
+    private bool LeftControl()
+    {
+        return Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
+    }
+
+    private bool ShootControl()
+    {
+        return Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0);
+    }
+
     private void RotateShip(Vector3 angle)
     {
-        model
+        _shipRotating = model
             .transform
             .DORotate(angle, secondsToRotate)
             .SetEase(Ease.OutBack);

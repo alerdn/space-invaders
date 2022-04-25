@@ -47,8 +47,20 @@ public class EnemyPoolManager : MonoBehaviour
     {
         foreach (var enemy in enemyPool)
         {
+            if (enemy.activeInHierarchy) continue;
             enemy.SetActive(true);
         }
+    }
+
+    public int GetEnemiesDestroyedAmount()
+    {
+        int amount = 0;
+        foreach (var enemy in enemyPool)
+        {
+            if (!enemy.activeInHierarchy) amount++;
+        }
+
+        return amount;
     }
 
     private GameObject GetShootingEnemy(Transform spawn)

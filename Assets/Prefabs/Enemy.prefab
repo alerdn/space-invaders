@@ -48,8 +48,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   poolManager: {fileID: 0}
   shootPoint: {fileID: 942711571808173053}
-  minInterval: 1
-  maxInterval: 5
+  minInterval: 0.5
+  maxInterval: 3
 --- !u!65 &294624313990058914
 BoxCollider:
   m_ObjectHideFlags: 0
