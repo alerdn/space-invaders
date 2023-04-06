@@ -7,6 +7,8 @@ using UnityEngine.UI;
 
 public class Player : MonoBehaviour, IDamageable, IKillable
 {
+    public event Action<int> OnInit;
+    public event Action<int> OnDamageTaken;
     public event Action OnKill;
 
     [Header("Setup")]
@@ -20,9 +22,6 @@ public class Player : MonoBehaviour, IDamageable, IKillable
     [SerializeField] private Transform model;
     [SerializeField] private float secondsToRotate = 0.5f;
     [SerializeField] private Color _invulnerableColor;
-
-    [Header("Life Controller")]
-    [SerializeField] private List<Image> _lifeTicks;
 
     [Header("Bullet Pool")]
     [SerializeField] private BulletPoolManager poolManager;
@@ -44,10 +43,12 @@ public class Player : MonoBehaviour, IDamageable, IKillable
             _speed = ship.Speed;
             _damage = ship.Damage;
         }
+        OnInit?.Invoke(_maxLife);
 
         _currentLife = _maxLife;
         model.transform.localScale = .08f * Vector3.one;
         _meshRenderer = model.GetComponent<MeshRenderer>();
+
     }
 
     private void Update()
@@ -87,9 +88,10 @@ public class Player : MonoBehaviour, IDamageable, IKillable
         if (!_isInvulnerable)
         {
             _currentLife -= damage;
-            _lifeTicks[_currentLife].gameObject.SetActive(false);
+            OnDamageTaken?.Invoke(_currentLife);
 
-            OnDamage();
+            transform.position = _initialPosition;
+            StartCoroutine(SetInvulnerable());
 
             if (_currentLife <= 0) Kill();
         }
@@ -122,12 +124,6 @@ public class Player : MonoBehaviour, IDamageable, IKillable
             .transform
             .DORotate(angle, secondsToRotate)
             .SetEase(Ease.OutBack);
-    }
-
-    private void OnDamage()
-    {
-        transform.position = _initialPosition;
-        StartCoroutine(SetInvulnerable());
     }
 
     private IEnumerator SetInvulnerable()

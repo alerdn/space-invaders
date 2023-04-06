@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipName: X-Wing-V1
   Prefab: {fileID: 4554181297479755479, guid: a672ad5b71c8cc44ca985cfc35b6dbaf, type: 3}
-  MaxLife: 5
-  Speed: 16
+  MaxLife: 4
+  Speed: 18
   Damage: 3
