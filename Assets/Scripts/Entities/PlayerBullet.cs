@@ -9,13 +9,13 @@ public class PlayerBullet : Bullet
         transform.Translate(Vector3.forward * speed * Time.deltaTime);
     }
 
-    private void OnCollisionEnter(Collision collision)
+    private void OnTriggerEnter(Collider other)
     {
-        var obj = collision.GetContact(0).otherCollider;
+        var obj = other.gameObject;
 
-        obj.GetComponent<IDamageable>()?.Damage();
+        obj.GetComponent<Enemy>()?.Damage(_damage);
 
-        // Desativando bullet ao acertar inimigo
+        // Desativando a bullet ao acertar o jogador ou barreira
         gameObject.SetActive(false);
     }
 }

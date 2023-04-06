@@ -41,7 +41,7 @@ public class Enemy : MonoBehaviour, IDamageable
         if (bullet)
         {
             bullet.SetActive(true);
-            bullet.GetComponent<Bullet>().StartBullet();
+            bullet.GetComponent<Bullet>().StartBullet(1);
             bullet.transform.position = shootPoint.position;
         }
 
@@ -53,9 +53,9 @@ public class Enemy : MonoBehaviour, IDamageable
         this.canShoot = canShoot;
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
-        _currentLife--;
+        _currentLife -= damage;
 
         if (_currentLife <= 0)
             gameObject.SetActive(false);

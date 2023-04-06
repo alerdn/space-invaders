@@ -16,9 +16,9 @@ public class Barrier : MonoBehaviour, IKillable, IDamageable
         mesh = gameObject.GetComponentInChildren<MeshRenderer>();
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
-        _currentLife--;
+        _currentLife -= damage;
 
         float lifePercentage = LifePercentage(_currentLife);
         ChangeColor(lifePercentage);

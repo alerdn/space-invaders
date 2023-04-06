@@ -4,5 +4,7 @@ using UnityEngine;
 
 public class Ship : MonoBehaviour
 {
-    public string shipName;
+    public ScriptableShip Data { get => _data; }
+
+    [SerializeField] private ScriptableShip _data;
 }

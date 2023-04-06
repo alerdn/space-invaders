@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8664324b4f209b245b0e51209c9f752b, type: 3}
+  m_Name: Eagle-TX
+  m_EditorClassIdentifier: 
+  ShipName: Eagle-TX
+  Prefab: {fileID: 281879461501355406, guid: 745a77cdc3b71b24cbf3595622c5d198, type: 3}
+  MaxLife: 5
+  Speed: 16
+  Damage: 3

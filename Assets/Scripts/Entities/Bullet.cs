@@ -4,11 +4,13 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    public float speed = 2;
-    public float timeToReset = 6;
+    protected float speed = 30;
+    protected float timeToReset = 10;
+    protected int _damage;
 
-    public void StartBullet()
+    public void StartBullet(int damage)
     {
+        _damage = damage;
         Invoke(nameof(FinishUsage), timeToReset);
     }
 

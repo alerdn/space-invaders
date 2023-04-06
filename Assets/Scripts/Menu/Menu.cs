@@ -9,24 +9,24 @@ using TMPro;
 public class Menu : MonoBehaviour
 {
     [Header("Menu setup")]
-    public GameObject quitWindow;
-    public GameObject quitWindowBackground;
-    public float quitWindowDelay = .5f;
-    public float smoothnessSlideColor = 20f;
-    public Color backgroundColor = new Color32(6, 15, 22, 215);
+    [SerializeField] private GameObject quitWindow;
+    [SerializeField] private GameObject quitWindowBackground;
+    [SerializeField] private float quitWindowDelay = .5f;
+    [SerializeField] private float smoothnessSlideColor = 20f;
+    [SerializeField] private Color backgroundColor = new Color32(6, 15, 22, 215);
 
     [Header("Ship animation setup")]
-    public int shipSpacing = 25;
-    public float duration = 5f;
-    public List<GameObject> ships;
+    [SerializeField] private int shipSpacing = 25;
+    [SerializeField] private float duration = 5f;
+    [SerializeField] private List<Ship> ships;
 
     [Header("Selector setup")]
-    public float initialPositionX = 5;
-    public float switchDuration = 1f;
-    public Ease switchEase = Ease.OutSine;
-    public TMP_Text shipLabel;
-    public GameObject prevButton;
-    public GameObject nextButton;
+    [SerializeField] private float initialPositionX = 5;
+    [SerializeField] private float switchDuration = 1f;
+    [SerializeField] private Ease switchEase = Ease.OutSine;
+    [SerializeField] private TMP_Text shipLabel;
+    [SerializeField] private GameObject prevButton;
+    [SerializeField] private GameObject nextButton;
 
     private int _currentShipIndex = 0;
     private List<Tween> _tweens = new List<Tween>();
@@ -34,7 +34,7 @@ public class Menu : MonoBehaviour
 
     void Start()
     {
-        SetShipLabel(0);
+        SelectShip(_currentShipIndex);
         prevButton.GetComponent<Button>().interactable = false;
 
         for (int i = 0; i < ships.Count; i++)
@@ -51,9 +51,11 @@ public class Menu : MonoBehaviour
         }
     }
 
-    private void SetShipLabel(int index)
+    private void SelectShip(int index)
     {
-        shipLabel.text = ships[index].GetComponent<Ship>()?.shipName;
+        Ship ship = ships[index];
+        shipLabel.text = ship.Data.ShipName;
+        ShipSelector.Instance.SelectShip(ship.Data);
     }
 
     public void Play()
@@ -118,7 +120,7 @@ public class Menu : MonoBehaviour
 
             _currentShipIndex = nextShipIndex;
 
-            SetShipLabel(_currentShipIndex);
+            SelectShip(_currentShipIndex);
         }
     }
 

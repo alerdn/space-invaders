@@ -8,11 +8,12 @@ public class EnemyBullet : Bullet
     {
         transform.Translate(Vector3.back * speed * Time.deltaTime);
     }
-    private void OnCollisionEnter(Collision collision)
-    {
-        var obj = collision.gameObject;
 
-        obj.GetComponent<IDamageable>()?.Damage();
+    private void OnTriggerEnter(Collider other)
+    {
+        var obj = other.gameObject;
+
+        obj.GetComponent<IDamageable>()?.Damage(_damage);
 
         // Desativando a bullet ao acertar o jogador ou barreira
         gameObject.SetActive(false);

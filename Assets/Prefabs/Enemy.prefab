@@ -46,6 +46,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a6f051fd09b42a4789ba0a30d82bd3a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxLife: 6
+  _currentLife: 0
   poolManager: {fileID: 0}
   shootPoint: {fileID: 942711571808173053}
   minInterval: 0.5

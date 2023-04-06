@@ -67,6 +67,7 @@ MonoBehaviour:
   model: {fileID: 3923453278834520113}
   secondsToRotate: 0.5
   _invulnerableColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
+  _lifeTicks: []
   poolManager: {fileID: 0}
   shootPoint: {fileID: 2978081556595235909}
 --- !u!54 &5905891553030651525

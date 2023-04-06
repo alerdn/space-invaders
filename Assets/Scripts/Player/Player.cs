@@ -12,8 +12,9 @@ public class Player : MonoBehaviour, IDamageable, IKillable
     [Header("Setup")]
     [SerializeField] private int _maxLife = 5;
     [SerializeField] private int _currentLife;
+    [SerializeField] private int _damage = 1;
     [SerializeField] private float _secondsInvulnerable;
-    [SerializeField] private float speed = 16;
+    [SerializeField] private float _speed = 16;
 
     [Header("Player Model")]
     [SerializeField] private Transform model;
@@ -33,8 +34,19 @@ public class Player : MonoBehaviour, IDamageable, IKillable
 
     private void Start()
     {
-        _currentLife = _maxLife;
         _initialPosition = transform.position;
+
+        if (ShipSelector.Instance != null)
+        {
+            ScriptableShip ship = ShipSelector.Instance.SelectedShip;
+            model = Instantiate(ship.Prefab.transform, transform);
+            _maxLife = ship.MaxLife;
+            _speed = ship.Speed;
+            _damage = ship.Damage;
+        }
+
+        _currentLife = _maxLife;
+        model.transform.localScale = .08f * Vector3.one;
         _meshRenderer = model.GetComponent<MeshRenderer>();
     }
 
@@ -43,12 +55,12 @@ public class Player : MonoBehaviour, IDamageable, IKillable
         // Key Down
         if (RightControl())
         {
-            transform.Translate(Vector3.right * speed * Time.deltaTime);
+            transform.Translate(Vector3.right * _speed * Time.deltaTime);
             RotateShip(new Vector3(0, 0, -45));
         }
         else if (LeftControl())
         {
-            transform.Translate(Vector3.left * speed * Time.deltaTime);
+            transform.Translate(Vector3.left * _speed * Time.deltaTime);
             RotateShip(new Vector3(0, 0, 45));
         }
 
@@ -58,7 +70,7 @@ public class Player : MonoBehaviour, IDamageable, IKillable
             if (bullet)
             {
                 bullet.SetActive(true);
-                bullet.GetComponent<Bullet>().StartBullet();
+                bullet.GetComponent<Bullet>().StartBullet(_damage);
                 bullet.transform.position = shootPoint.position;
             }
         }
@@ -70,11 +82,11 @@ public class Player : MonoBehaviour, IDamageable, IKillable
         }
     }
 
-    public void Damage()
+    public void Damage(int damage)
     {
         if (!_isInvulnerable)
         {
-            _currentLife--;
+            _currentLife -= damage;
             _lifeTicks[_currentLife].gameObject.SetActive(false);
 
             OnDamage();
