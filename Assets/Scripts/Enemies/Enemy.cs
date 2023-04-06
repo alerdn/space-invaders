@@ -2,8 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : MonoBehaviour, IKillable
+public class Enemy : MonoBehaviour, IDamageable
 {
+    [Header("Setup")]
+    [SerializeField] private int _maxLife = 1;
+    [SerializeField] private int _currentLife;
+
     [Header("Bullet Pool")]
     public BulletPoolManager poolManager;
     public Transform shootPoint;
@@ -14,6 +18,11 @@ public class Enemy : MonoBehaviour, IKillable
     private float _intervalToShoot = 5f;
     private Coroutine _shooting = null;
     private bool canShoot = false;
+
+    private void Start()
+    {
+        _currentLife = _maxLife;
+    }
 
     private void Update()
     {
@@ -44,8 +53,11 @@ public class Enemy : MonoBehaviour, IKillable
         this.canShoot = canShoot;
     }
 
-    public void Kill()
+    public void Damage()
     {
-        gameObject.SetActive(false);
+        _currentLife--;
+
+        if (_currentLife <= 0)
+            gameObject.SetActive(false);
     }
 }

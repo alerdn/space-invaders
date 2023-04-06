@@ -12,7 +12,8 @@ public class PlayerBullet : Bullet
     private void OnCollisionEnter(Collision collision)
     {
         var obj = collision.GetContact(0).otherCollider;
-        obj.GetComponent<Enemy>()?.Kill();
+
+        obj.GetComponent<IDamageable>()?.Damage();
 
         // Desativando bullet ao acertar inimigo
         gameObject.SetActive(false);

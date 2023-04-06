@@ -12,8 +12,7 @@ public class EnemyBullet : Bullet
     {
         var obj = collision.gameObject;
 
-        obj.GetComponent<Player>()?.Kill();
-        obj.GetComponent<Barrier>()?.Damage();
+        obj.GetComponent<IDamageable>()?.Damage();
 
         // Desativando a bullet ao acertar o jogador ou barreira
         gameObject.SetActive(false);

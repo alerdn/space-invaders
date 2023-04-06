@@ -60,9 +60,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a9ee22e35839e7745ab0dc188d9ff78f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxLife: 5
+  _currentLife: 0
+  _secondsInvulnerable: 2
   speed: 16
   model: {fileID: 3923453278834520113}
   secondsToRotate: 0.5
+  _invulnerableColor: {r: 0.26415092, g: 0.26415092, b: 0.26415092, a: 1}
   poolManager: {fileID: 0}
   shootPoint: {fileID: 2978081556595235909}
 --- !u!54 &5905891553030651525
@@ -79,7 +83,7 @@ Rigidbody:
   m_UseGravity: 0
   m_IsKinematic: 0
   m_Interpolate: 0
-  m_Constraints: 12
+  m_Constraints: 126
   m_CollisionDetection: 0
 --- !u!1 &5453667391549098014
 GameObject:
