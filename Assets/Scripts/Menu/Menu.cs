@@ -25,12 +25,19 @@ public class Menu : MonoBehaviour
     [SerializeField] private float switchDuration = 1f;
     [SerializeField] private Ease switchEase = Ease.OutSine;
     [SerializeField] private TMP_Text shipLabel;
+    [SerializeField] private Image atkBar;
+    [SerializeField] private Image hpBar;
+    [SerializeField] private Image spdBar;
     [SerializeField] private GameObject prevButton;
     [SerializeField] private GameObject nextButton;
 
     private int _currentShipIndex = 0;
     private List<Tween> _tweens = new List<Tween>();
     private Color _transparent = new Color(0, 0, 0, 0);
+
+    private int _atkMaximo = 6;
+    private int _hpMaximo = 15;
+    private int _spdMaximo = 25;
 
     void Start()
     {
@@ -55,6 +62,11 @@ public class Menu : MonoBehaviour
     {
         Ship ship = ships[index];
         shipLabel.text = ship.Data.ShipName;
+
+        atkBar.rectTransform.sizeDelta = new Vector2((float)ship.Data.Damage / (float)_atkMaximo * 100 * 185 / 100, 26);
+        hpBar.rectTransform.sizeDelta = new Vector2((float)ship.Data.MaxLife / (float)_hpMaximo * 100 * 185 / 100, 26);
+        spdBar.rectTransform.sizeDelta = new Vector2((float)ship.Data.Speed / (float)_spdMaximo * 100 * 185 / 100, 26);
+
         ShipSelector.Instance.SelectShip(ship.Data);
     }
 

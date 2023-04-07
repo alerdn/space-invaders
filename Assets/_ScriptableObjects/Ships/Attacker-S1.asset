@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipName: Attacker-S1
   Prefab: {fileID: 2907491432433429739, guid: 5e69db28db8a2c3489766fa1ce875a0b, type: 3}
-  MaxLife: 3
-  Speed: 16
+  MaxLife: 6
+  Speed: 20
   Damage: 6

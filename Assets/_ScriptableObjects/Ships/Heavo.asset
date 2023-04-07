@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ShipName: Heavo
   Prefab: {fileID: 301440150206615204, guid: 759dff70eb5bd9248bb05b82a5e93cc6, type: 3}
-  MaxLife: 11
-  Speed: 12
-  Damage: 2
+  MaxLife: 15
+  Speed: 14
+  Damage: 3

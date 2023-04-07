@@ -15,5 +15,5 @@ MonoBehaviour:
   ShipName: X-Wing-V1
   Prefab: {fileID: 4554181297479755479, guid: a672ad5b71c8cc44ca985cfc35b6dbaf, type: 3}
   MaxLife: 4
-  Speed: 18
+  Speed: 25
   Damage: 3
