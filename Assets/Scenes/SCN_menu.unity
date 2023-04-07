@@ -688,7 +688,7 @@ PrefabInstance:
     - target: {fileID: 6241474612231757155, guid: cd79817563bb6714ea760186dfe03658, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1284733383}
+      objectReference: {fileID: 0}
     - target: {fileID: 6241474612231757155, guid: cd79817563bb6714ea760186dfe03658, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
@@ -2625,6 +2625,7 @@ GameObject:
   - component: {fileID: 1417239047}
   - component: {fileID: 1417239046}
   - component: {fileID: 1417239048}
+  - component: {fileID: 1417239049}
   m_Layer: 5
   m_Name: Menu
   m_TagString: Untagged
@@ -2719,6 +2720,41 @@ MonoBehaviour:
   m_ChildScaleWidth: 0
   m_ChildScaleHeight: 0
   m_ReverseArrangement: 0
+--- !u!114 &1417239049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1417239044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f0ab5e96a64855e45b5fc53a7a198f8f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  quitWindow: {fileID: 777964311}
+  quitWindowBackground: {fileID: 1025636642}
+  quitWindowDelay: 0.3
+  smoothnessSlideColor: 50
+  backgroundColor: {r: 0.023529412, g: 0.05882353, b: 0.08627451, a: 0.9411765}
+  shipSpacing: 25
+  duration: 5
+  ships:
+  - {fileID: 216510336}
+  - {fileID: 1880316536}
+  - {fileID: 1752891803}
+  - {fileID: 772618667}
+  - {fileID: 627578568}
+  - {fileID: 1689787769}
+  initialPositionX: 5
+  switchDuration: 1
+  switchEase: 34
+  shipLabel: {fileID: 861008572}
+  atkBar: {fileID: 1044013612}
+  hpBar: {fileID: 422516494}
+  spdBar: {fileID: 820593207}
+  prevButton: {fileID: 1794635372}
+  nextButton: {fileID: 946773960}
 --- !u!1001 &1422437990
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2825,7 +2861,7 @@ PrefabInstance:
     - target: {fileID: 6241474612231757155, guid: cd79817563bb6714ea760186dfe03658, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
-      objectReference: {fileID: 1284733383}
+      objectReference: {fileID: 0}
     - target: {fileID: 6241474612231757155, guid: cd79817563bb6714ea760186dfe03658, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2

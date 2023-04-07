@@ -63,9 +63,21 @@ public class Menu : MonoBehaviour
         Ship ship = ships[index];
         shipLabel.text = ship.Data.ShipName;
 
-        atkBar.rectTransform.sizeDelta = new Vector2((float)ship.Data.Damage / (float)_atkMaximo * 100 * 185 / 100, 26);
-        hpBar.rectTransform.sizeDelta = new Vector2((float)ship.Data.MaxLife / (float)_hpMaximo * 100 * 185 / 100, 26);
-        spdBar.rectTransform.sizeDelta = new Vector2((float)ship.Data.Speed / (float)_spdMaximo * 100 * 185 / 100, 26);
+        DOTween.To(
+            () => atkBar.rectTransform.sizeDelta.x,
+            x => atkBar.rectTransform.sizeDelta = new Vector2(x, 26f),
+            (float)ship.Data.Damage / (float)_atkMaximo * 100 * 185 / 100,
+            .5f);
+        DOTween.To(
+            () => hpBar.rectTransform.sizeDelta.x,
+            x => hpBar.rectTransform.sizeDelta = new Vector2(x, 26f),
+            (float)ship.Data.MaxLife / (float)_hpMaximo * 100 * 185 / 100,
+            .5f);
+        DOTween.To(
+            () => spdBar.rectTransform.sizeDelta.x,
+            x => spdBar.rectTransform.sizeDelta = new Vector2(x, 26f),
+            (float)ship.Data.Speed / (float)_spdMaximo * 100 * 185 / 100,
+            .5f);
 
         ShipSelector.Instance.SelectShip(ship.Data);
     }
