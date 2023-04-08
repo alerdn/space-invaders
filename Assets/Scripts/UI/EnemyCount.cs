@@ -21,6 +21,6 @@ public class EnemyCount : MonoBehaviour
 
     private void UpdateEnemyCounter(int count)
     {
-        enemyCounterText.text = $"Invasores destruídos: {count}/{enemyPoolManager.enemyPool.Count}";
+        enemyCounterText.text = $"Invaders destroyed: {count}/{enemyPoolManager.enemyPool.Count}";
     }
 }

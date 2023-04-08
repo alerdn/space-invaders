@@ -1,0 +1,41 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: MAT_Sun
+  m_Shader: {fileID: -6465566751694194690, guid: 5c47c9c22ac294644bf638582e55e6dd, type: 3}
+  m_ShaderKeywords: 
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - Vector1_1a12727b5e81403eb4a3840af941ab05: 1
+    - Vector1_3d8c595a3f0041dfa4981e77472a090a: 1
+    - Vector1_d65c2928c84343e8853dbcc50062c576: 1
+    m_Colors:
+    - Color_300b0b16b125488e82f50e8d6a652360: {r: 1.4980392, g: 0.4627451, b: 0, a: 0}
+    - Color_e79045aace51403185c42f53e0c3a6dc: {r: 2.9960785, g: 1.6627451, b: 0.09411765, a: 0}
+  m_BuildTextureStacks: []

@@ -29,7 +29,7 @@ public class PlayerLifeCount : MonoBehaviour
     {
         for (int i = _lifeTicks.Count; i > currentLife; i--)
         {
-            _lifeTicks[i-1].gameObject.SetActive(false);
+            _lifeTicks[i-1].enabled = false;
         }
     }
 

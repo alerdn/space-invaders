@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShipSelector : PersistentSingleton<ShipSelector>
+public class ShipSelector : Singleton<ShipSelector>
 {
     public ScriptableShip SelectedShip { get; private set; }
 
