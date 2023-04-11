@@ -32,4 +32,13 @@ public class BulletPoolManager : MonoBehaviour
 
         return null;
     }
+
+    public int AmmoLeft()
+    {
+        int ammoLeft = 0;
+        foreach (var bullet in bulletPool)
+            if (!bullet.activeInHierarchy) ammoLeft++;
+
+        return ammoLeft;
+    }
 }

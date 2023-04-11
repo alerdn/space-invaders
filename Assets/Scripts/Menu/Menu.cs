@@ -9,9 +9,15 @@ using TMPro;
 public class Menu : MonoBehaviour
 {
     [Header("Ship animation setup")]
+    [SerializeField] private GameObject _shipContainer;
     [SerializeField] private int shipSpacing = 25;
     [SerializeField] private float duration = 5f;
     [SerializeField] private List<Ship> ships;
+
+    [Header("Buttons")]
+    [SerializeField] private Button _playBtn;
+    [SerializeField] private Button _prevShipBtn;
+    [SerializeField] private Button _nextShipBtn;
 
     [Header("Selector setup")]
     [SerializeField] private float initialPositionX = 5;
@@ -19,6 +25,7 @@ public class Menu : MonoBehaviour
     [SerializeField] private Ease switchEase = Ease.OutSine;
     [SerializeField] private TMP_Text shipLabel;
     [SerializeField] private Image atkBar;
+    [SerializeField] private Image fireRateBar;
     [SerializeField] private Image hpBar;
     [SerializeField] private Image spdBar;
     [SerializeField] private GameObject prevButton;
@@ -28,6 +35,7 @@ public class Menu : MonoBehaviour
     private List<Tween> _tweens = new List<Tween>();
 
     private int _atkMaximo = 6;
+    private int _fireRateMaximo = 10;
     private int _hpMaximo = 15;
     private int _spdMaximo = 25;
 
@@ -48,6 +56,10 @@ public class Menu : MonoBehaviour
 
             _tweens.Add(t);
         }
+
+        _playBtn.onClick.AddListener(Play);
+        _prevShipBtn.onClick.AddListener(() => SwitchShip(-1));
+        _nextShipBtn.onClick.AddListener(() => SwitchShip(1));
     }
 
     private void SelectShip(int index)
@@ -59,6 +71,11 @@ public class Menu : MonoBehaviour
             () => atkBar.rectTransform.sizeDelta.x,
             x => atkBar.rectTransform.sizeDelta = new Vector2(x, 26f),
             (float)ship.Data.Damage / (float)_atkMaximo * 100 * 185 / 100,
+            .5f);
+        DOTween.To(
+            () => fireRateBar.rectTransform.sizeDelta.x,
+            x => fireRateBar.rectTransform.sizeDelta = new Vector2(x, 26f),
+            (float)ship.Data.FirePerSeconds / (float)_fireRateMaximo * 100 * 185 / 100,
             .5f);
         DOTween.To(
             () => hpBar.rectTransform.sizeDelta.x,
@@ -90,7 +107,7 @@ public class Menu : MonoBehaviour
         {
             float nextPositionX = initialPositionX + ships[nextShipIndex].transform.localPosition.x;
 
-            gameObject.transform
+            _shipContainer.transform
                 .DOMoveX(nextPositionX, switchDuration)
                 .SetEase(switchEase);
 

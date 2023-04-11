@@ -17,3 +17,4 @@ MonoBehaviour:
   MaxLife: 5
   Speed: 25
   Damage: 2
+  FirePerSeconds: 6

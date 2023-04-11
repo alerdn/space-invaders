@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Player : MonoBehaviour, IDamageable, IKillable
 {
@@ -16,6 +17,11 @@ public class Player : MonoBehaviour, IDamageable, IKillable
     [SerializeField] private int _currentLife;
     [SerializeField] private int _damage = 1;
     [SerializeField] private float _speed = 16;
+    [SerializeField] private float _fireRate = .1f;
+
+    [Header("Controls")]
+    [SerializeField] private EventTrigger _attackBtn;
+    [SerializeField] private Joystick _joystick;
 
     [Header("Player Model")]
     [SerializeField] private Transform model;
@@ -26,6 +32,8 @@ public class Player : MonoBehaviour, IDamageable, IKillable
     [SerializeField] private Transform shootPoint;
 
     private bool _isInvulnerable = false;
+    private bool _tryingToShoot;
+    private Coroutine _shooting = null;
 
     private void Start()
     {
@@ -36,12 +44,28 @@ public class Player : MonoBehaviour, IDamageable, IKillable
             _maxLife = ship.MaxLife;
             _speed = ship.Speed;
             _damage = ship.Damage;
+            _fireRate = 1f / (float)ship.FirePerSeconds;
         }
         OnInit?.Invoke(_maxLife);
 
         _currentLife = _maxLife;
         model.transform.localScale = .08f * Vector3.one;
 
+        HandleTriggers();
+    }
+
+    private void HandleTriggers()
+    {
+        var onPointerDown = new EventTrigger.Entry();
+        onPointerDown.eventID = EventTriggerType.PointerDown;
+        onPointerDown.callback.AddListener((myEvent) => _tryingToShoot = true);
+
+        var onPointerUp = new EventTrigger.Entry();
+        onPointerUp.eventID = EventTriggerType.PointerUp;
+        onPointerUp.callback.AddListener((myEvent) => _tryingToShoot = false);
+
+        _attackBtn.triggers.Add(onPointerDown);
+        _attackBtn.triggers.Add(onPointerUp);
     }
 
     private void Update()
@@ -60,13 +84,8 @@ public class Player : MonoBehaviour, IDamageable, IKillable
 
         if (ShootControl())
         {
-            var bullet = poolManager.GetPooledBullet();
-            if (bullet)
-            {
-                bullet.SetActive(true);
-                bullet.GetComponent<Bullet>().StartBullet(_damage);
-                bullet.transform.position = shootPoint.position;
-            }
+            if (_shooting == null)
+                _shooting = StartCoroutine(Shoot());
         }
 
         // Key Up
@@ -74,6 +93,20 @@ public class Player : MonoBehaviour, IDamageable, IKillable
         {
             RotateShip(Vector3.zero);
         }
+    }
+
+    private IEnumerator Shoot()
+    {
+        var bullet = poolManager.GetPooledBullet();
+        if (bullet)
+        {
+            bullet.SetActive(true);
+            bullet.GetComponent<Bullet>().StartBullet(_damage);
+            bullet.transform.position = shootPoint.position;
+        }
+
+        yield return new WaitForSeconds(_fireRate);
+        _shooting = null;
     }
 
     public void Damage(int damage)
@@ -95,17 +128,17 @@ public class Player : MonoBehaviour, IDamageable, IKillable
 
     private bool RightControl()
     {
-        return Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D);
+        return Input.GetKey(KeyCode.RightArrow) || Input.GetKey(KeyCode.D) || _joystick.Horizontal > 0;
     }
 
     private bool LeftControl()
     {
-        return Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A);
+        return Input.GetKey(KeyCode.LeftArrow) || Input.GetKey(KeyCode.A) || _joystick.Horizontal < 0;
     }
 
     private bool ShootControl()
     {
-        return Input.GetKeyDown(KeyCode.Space);
+        return Input.GetKeyDown(KeyCode.Space) || _tryingToShoot;
     }
 
     private void RotateShip(Vector3 angle)

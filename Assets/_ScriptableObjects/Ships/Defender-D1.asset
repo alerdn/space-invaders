@@ -15,5 +15,6 @@ MonoBehaviour:
   ShipName: Defender-D1
   Prefab: {fileID: 4443853831605296070, guid: 62990642302a7cc498dad6b168295e7d, type: 3}
   MaxLife: 10
-  Speed: 19
+  Speed: 20
   Damage: 3
+  FirePerSeconds: 5

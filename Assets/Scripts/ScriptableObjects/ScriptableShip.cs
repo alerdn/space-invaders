@@ -10,4 +10,5 @@ public class ScriptableShip : ScriptableObject
     public int MaxLife;
     public int Speed;
     public int Damage;
+    public int FirePerSeconds;    
 }
