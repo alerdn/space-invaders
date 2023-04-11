@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: MAT_barrier
-  m_Shader: {fileID: 10755, guid: 0000000000000000f000000000000000, type: 0}
+  m_Shader: {fileID: -6465566751694194690, guid: 7fb737cf988ecdb40b7d2da15a67c301, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -55,7 +55,23 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
+    - Vector1_1052e2c076a4411788fda0f6fad4b0a4: 30
+    - Vector1_1c08d40e4fe44d03b27b15378c8b9cf8: 2
+    - Vector1_5e5e86be983a4ccfbe311bf17754d97f: 10
+    - Vector1_ca9585d62b1c4beb8786891703f1ced9: 0.9
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
@@ -73,6 +89,12 @@ Material:
     - _UVSec: 0
     - _ZWrite: 1
     m_Colors:
+    - Color_729d554846214e63895029c90fdb7395: {r: 1.592157, g: 0.2901961, b: 0, a: 0}
+    - Color_7c2d37077df647d39e560422e1da654c: {r: 0, g: 0.46907458, b: 1.7731023, a: 1}
+    - Color_b2d4d42f65d443c7986c617c7271a458: {r: 2.682353, g: 0.5333334, b: 0, a: 0}
+    - Vector2_338cfeb0b39f42ae88fc1d726e11f94c: {r: 9, g: 8, b: 0, a: 0}
+    - Vector2_af6edb98be4d4fc6891954ae72ae3245: {r: 0, g: 0.2, b: 0, a: 0}
     - _Color: {r: 0.10332859, g: 0.35514, b: 0.8113208, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
+    - _dotsColor: {r: 0, g: 0.95686275, b: 2.8705883, a: 1}
   m_BuildTextureStacks: []

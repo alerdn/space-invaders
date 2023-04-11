@@ -15,26 +15,20 @@ public class Player : MonoBehaviour, IDamageable, IKillable
     [SerializeField] private int _maxLife = 5;
     [SerializeField] private int _currentLife;
     [SerializeField] private int _damage = 1;
-    [SerializeField] private float _secondsInvulnerable;
     [SerializeField] private float _speed = 16;
 
     [Header("Player Model")]
     [SerializeField] private Transform model;
     [SerializeField] private float secondsToRotate = 0.5f;
-    [SerializeField] private Color _invulnerableColor;
 
     [Header("Bullet Pool")]
     [SerializeField] private BulletPoolManager poolManager;
     [SerializeField] private Transform shootPoint;
 
-    private Vector3 _initialPosition;
     private bool _isInvulnerable = false;
-    private MeshRenderer _meshRenderer;
 
     private void Start()
     {
-        _initialPosition = transform.position;
-
         if (ShipSelector.Instance != null)
         {
             ScriptableShip ship = ShipSelector.Instance.SelectedShip;
@@ -47,7 +41,6 @@ public class Player : MonoBehaviour, IDamageable, IKillable
 
         _currentLife = _maxLife;
         model.transform.localScale = .08f * Vector3.one;
-        _meshRenderer = model.GetComponent<MeshRenderer>();
 
     }
 
@@ -56,12 +49,12 @@ public class Player : MonoBehaviour, IDamageable, IKillable
         // Key Down
         if (RightControl())
         {
-            transform.Translate(Vector3.right * _speed * Time.deltaTime);
+            transform.Translate(_speed * Time.deltaTime * Vector3.right);
             RotateShip(new Vector3(0, 0, -45));
         }
         else if (LeftControl())
         {
-            transform.Translate(Vector3.left * _speed * Time.deltaTime);
+            transform.Translate(_speed * Time.deltaTime * Vector3.left);
             RotateShip(new Vector3(0, 0, 45));
         }
 
@@ -89,9 +82,6 @@ public class Player : MonoBehaviour, IDamageable, IKillable
         {
             _currentLife -= damage;
             OnDamageTaken?.Invoke(_currentLife);
-
-            transform.position = _initialPosition;
-            StartCoroutine(SetInvulnerable());
 
             if (_currentLife <= 0) Kill();
         }
@@ -124,14 +114,5 @@ public class Player : MonoBehaviour, IDamageable, IKillable
             .transform
             .DORotate(angle, secondsToRotate)
             .SetEase(Ease.OutBack);
-    }
-
-    private IEnumerator SetInvulnerable()
-    {
-        _isInvulnerable = true;
-        _meshRenderer.material.SetColor("_Color", _invulnerableColor);
-        yield return new WaitForSeconds(_secondsInvulnerable);
-        _meshRenderer.material.SetColor("_Color", Color.white);
-        _isInvulnerable = false;
     }
 }

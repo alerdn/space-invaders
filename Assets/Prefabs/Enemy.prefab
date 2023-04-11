@@ -51,7 +51,7 @@ MonoBehaviour:
   poolManager: {fileID: 0}
   shootPoint: {fileID: 942711571808173053}
   minInterval: 0.5
-  maxInterval: 3
+  maxInterval: 2
 --- !u!65 &294624313990058914
 BoxCollider:
   m_ObjectHideFlags: 0

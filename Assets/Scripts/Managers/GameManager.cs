@@ -8,7 +8,7 @@ public class GameManager : Singleton<GameManager>
     [SerializeField] private Player _player;
 
     [Header("UI")]
-    [SerializeField] private GameObject _endScreen;
+    [SerializeField] private MenuLevel _menuLevel;
 
     private void Start()
     {
@@ -17,6 +17,6 @@ public class GameManager : Singleton<GameManager>
 
     private void EndGame()
     {
-        _endScreen.SetActive(true);
+        _menuLevel.SwitchMenu(true, true);
     }
 }

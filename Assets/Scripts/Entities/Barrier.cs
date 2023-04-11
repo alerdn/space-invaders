@@ -1,19 +1,27 @@
+using DG.Tweening;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class Barrier : MonoBehaviour, IKillable, IDamageable
 {
-    public float maxLife = 5f;
+    [Header("Colors")]
+    [SerializeField] [ColorUsage(true, true)] private Color _fullLifeColor;
+    [SerializeField] [ColorUsage(true, true)] private Color _lightlyHitLifeColor;
+    [SerializeField] [ColorUsage(true, true)] private Color _mediumLifeColor;
+    [SerializeField] [ColorUsage(true, true)] private Color _criticalLifeColor;
 
-    [SerializeField]
-    private float _currentLife;
+    [Header("Life")]
+    [SerializeField] private float maxLife = 5f;
+    [SerializeField] private float _currentLife;
+
     private MeshRenderer mesh;
 
     private void Awake()
     {
         _currentLife = maxLife;
         mesh = gameObject.GetComponentInChildren<MeshRenderer>();
+        SetColor(_fullLifeColor);
     }
 
     public void Damage(int damage)
@@ -38,16 +46,16 @@ public class Barrier : MonoBehaviour, IKillable, IDamageable
 
     private void SetColor(Color c)
     {
-        mesh.material.SetColor("_Color", c);
+        DOTween.To(() => mesh.material.GetColor("_dotsColor"), color => mesh.material.SetColor("_dotsColor", color), c, 1f);
     }
 
     private void ChangeColor(float lifePercentage)
     {
         if (lifePercentage <= 0.25f)
-            SetColor(Color.red);
+            SetColor(_criticalLifeColor);
         else if (lifePercentage <= 0.5f)
-            SetColor(Color.yellow);
+            SetColor(_mediumLifeColor);
         else if (lifePercentage <= 0.75f)
-            SetColor(Color.green);
+            SetColor(_lightlyHitLifeColor);
     }
 }

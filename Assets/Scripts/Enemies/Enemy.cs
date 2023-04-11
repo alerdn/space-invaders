@@ -13,9 +13,9 @@ public class Enemy : MonoBehaviour, IDamageable
     public Transform shootPoint;
     [Header("Range interval to shoot")]
     public float minInterval = 1f;
-    public float maxInterval = 5f;
+    public float maxInterval = 3f;
 
-    private float _intervalToShoot = 5f;
+    private float _intervalToShoot = 3f;
     private Coroutine _shooting = null;
     private bool canShoot = false;
 

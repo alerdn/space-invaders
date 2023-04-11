@@ -8,13 +8,6 @@ using TMPro;
 
 public class Menu : MonoBehaviour
 {
-    [Header("Menu setup")]
-    [SerializeField] private GameObject quitWindow;
-    [SerializeField] private GameObject quitWindowBackground;
-    [SerializeField] private float quitWindowDelay = .5f;
-    [SerializeField] private float smoothnessSlideColor = 20f;
-    [SerializeField] private Color backgroundColor = new Color32(6, 15, 22, 215);
-
     [Header("Ship animation setup")]
     [SerializeField] private int shipSpacing = 25;
     [SerializeField] private float duration = 5f;
@@ -33,7 +26,6 @@ public class Menu : MonoBehaviour
 
     private int _currentShipIndex = 0;
     private List<Tween> _tweens = new List<Tween>();
-    private Color _transparent = new Color(0, 0, 0, 0);
 
     private int _atkMaximo = 6;
     private int _hpMaximo = 15;
@@ -85,46 +77,6 @@ public class Menu : MonoBehaviour
     public void Play()
     {
         SceneManager.LoadScene(1);
-    }
-
-    public void SwitchQuitWindow(bool switchWindow)
-    {
-        if (switchWindow)
-        {
-            quitWindowBackground.SetActive(true);
-            StartCoroutine(SlideColor(_transparent, backgroundColor));
-
-            quitWindow.transform.localScale = Vector3.zero;
-            quitWindow.SetActive(true);
-            quitWindow.transform.DOScale(1, quitWindowDelay);
-        }
-        else
-        {
-            StartCoroutine(SlideColor(backgroundColor, _transparent, true));
-            quitWindow.transform
-                .DOScale(0, quitWindowDelay)
-                .OnComplete(() =>
-                {
-                    quitWindow.SetActive(false);
-                });
-        }
-
-    }
-
-    IEnumerator SlideColor(Color from, Color to, bool disableOnFinish = false)
-    {
-        for (float i = 0; i < 1; i += 1 / smoothnessSlideColor)
-        {
-            yield return new WaitForSeconds(quitWindowDelay / smoothnessSlideColor);
-            quitWindowBackground.GetComponent<Image>().color = Color.Lerp(from, to, i);
-        }
-
-        if (disableOnFinish) quitWindowBackground.SetActive(false);
-    }
-
-    public void Quit()
-    {
-        Application.Quit();
     }
 
     public void SwitchShip(int s)
